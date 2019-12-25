@@ -47,8 +47,7 @@ services:
     restart: always
     hostname: "celery"
     command:  celery -A DjangoSmartiCityDevices worker -l info
-    ports:
-    - "8010:8000"
+
     volumes:
     - "./docker/volumes/django/logs:/var/log"
     networks:
@@ -75,6 +74,8 @@ services:
     restart: always
     networks:
       - backend
+    ports:
+      - "5432:5432"
     volumes:
       - "./docker/volumes/postgresql/logs:/var/log"
       - "./docker/volumes/postgresql/config:/var/run/postgres/postgres.sock"
@@ -101,7 +102,7 @@ services:
       RABBITMQ_DEFAULT_PASS: "rabbitmq"
       RABBITMQ_DEFAULT_VHOST: "/"
     ports:
-      - "15672:15672"
+      - "8010:15672"
       - "5672:5672"
     networks:
       - backend
