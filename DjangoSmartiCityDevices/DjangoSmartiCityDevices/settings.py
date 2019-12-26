@@ -81,8 +81,12 @@ WSGI_APPLICATION = 'DjangoSmartiCityDevices.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'docker',
+        'USER': 'docker',
+        'PASSWORD': 'docker',
+        'HOST': 'postgresql',
+        'PORT': 5432,
     }
 }
 
@@ -120,7 +124,13 @@ CELERY_TIMEZONE = 'Europe/Madrid'
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
-LANGUAGE_CODE = 'eu-es'
+LANGUAGE_CODE = 'es'
+
+from django.utils.translation import ugettext_lazy as _
+LANGUAGES = (
+    ('en', _('English')),
+    ('es', _('Spanish')),
+)
 
 TIME_ZONE = 'UTC'
 

@@ -31,7 +31,7 @@ services:
     restart: always
     volumes:
     - "./docker/volumes/django/logs:/var/log"
-    command: gunicorn DjangoSmartiCityDevices.wsgi -b 0.0.0.0:8000
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && gunicorn DjangoSmartiCityDevices.wsgi -b 0.0.0.0:8000"
     links:
     - redis-server
     - postgresql
